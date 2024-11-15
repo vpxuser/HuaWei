@@ -4,28 +4,14 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class HJ103_梅花桩最长路径 {
-    public static int step(int index,int[] nums){
-        HashSet<Integer> set = new HashSet<>();
-        set.add(nums[index]);
-        for(int i=index;i<nums.length;i++){
-            boolean added = true;
-            for (Integer num:set){
-                if (nums[i] <= num) {
-                    added = false;
-                    break;
-                }
-            }
-            if (added){
-                set.add(nums[i]);
+    public static int step(int[] nums,ArrayList<Integer> results,int index,int count){
+        for(int i=index+1;i<nums.length;i++){
+            if(nums[i]>nums[index]){
+                int result = step(nums,results,i,count+1);
             }
         }
-        int result = set.size();
-        ArrayList<Integer> list = new ArrayList<>(set);
-        Collections.sort(list);
-        for (int i = index;i<nums.length;i++){
-
-        }
-        return 1;
+        results.add(count);
+        return count;
     }
 
 
@@ -33,7 +19,7 @@ public class HJ103_梅花桩最长路径 {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int n = sc.nextInt();
-            sc.hasNextLine();
+            sc.nextLine();
             String[] input = sc.nextLine().split(" ");
             int[] nums = new int[n];
             for (int i = 0; i < n; i++) {
@@ -41,11 +27,14 @@ public class HJ103_梅花桩最长路径 {
             }
             int max = 0;
             for (int i = 0; i < n; i++) {
-                int min = step(i,nums);
+                ArrayList<Integer> results = new ArrayList<>();
+                step(nums,results,i,1);
+                int min = Collections.max(results);
                 if (min > max) {
                     max = min;
                 }
             }
+            System.out.println(max);
         }
     }
 }
