@@ -1,8 +1,8 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class HJ88_扑克牌比大小 {
-    public static HashMap<String,Integer> map = new HashMap<>();
+public class HJ88_斗地主扑克牌比大小 {
+    public static final HashMap<String,Integer> map = new HashMap<>();
 
     public static void init(){
         map.put("J",11);
@@ -14,29 +14,24 @@ public class HJ88_扑克牌比大小 {
         map.put("JOKER",17);
     }
 
-    public static boolean checkInput(String[] input) {
-        switch (input.length){
-            case 1:
-                return true;
-            case 2:
-            case 3:
-            case 4:
-                boolean vaild = true;
-                for (int i = 1; i < input.length; i++) {
-                    if (!input[i].equalsIgnoreCase(input[i - 1])) {
-                        vaild = false;
-                        break;
-                    }
+    public static boolean checkRange(String[] input) {
+        if(input.length == 1){
+            return true;
+        } else if(input.length == 2 || input.length == 3 || input.length == 4){
+            for (int i = 1; i < input.length; i++) {
+                if (!input[i].equalsIgnoreCase(input[i - 1])) {
+                    return false;
                 }
-                return vaild;
-            case 5:
-                int[] ninput = convert(input);
-                for (int i = 1; i < ninput.length; i++) {
-                    if (ninput[i] != ninput[i - 1] + 1) {
-                        return false;
-                    }
+            }
+            return true;
+        } else if (input.length == 5) {
+            int[] ninput = convert(input);
+            for (int i = 1; i < ninput.length; i++) {
+                if (ninput[i] != ninput[i - 1] + 1) {
+                    return false;
                 }
-                return true;
+            }
+            return true;
         }
         return false;
     }
@@ -54,7 +49,7 @@ public class HJ88_扑克牌比大小 {
             switch (input[0]) {
                 case "A":
                     nums[0] = 1;
-                    nums[1] = 1;
+                    nums[1] = 2;
                     break;
                 case "2":
                     nums[0] = 2;
@@ -93,7 +88,7 @@ public class HJ88_扑克牌比大小 {
             String[] left = input[0].split(" ");
             String[] right = input[1].split(" ");
             int result = 0;
-            if (checkInput(left) && checkInput(right)) {
+            if (checkRange(left) && checkRange(right)) {
                 result = checkRule(left,right);
                 switch (result){
                     case 1:

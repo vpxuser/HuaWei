@@ -1,6 +1,9 @@
 import java.util.*;
 
-public class HJ43_迷宫 {
+/**
+ * BFS 广度优先搜索算法
+ */
+public class HJ43_获取通关迷宫的最短路径 {
 
     public static boolean bfs(int[][] graph,int x,int y,boolean[][] visited,ArrayList<String> result){
         visited[x][y] = true;

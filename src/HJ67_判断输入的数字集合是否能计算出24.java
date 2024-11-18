@@ -1,7 +1,6 @@
 import java.util.Scanner;
-import java.util.Set;
 
-public class HJ67_获取24的游戏 {
+public class HJ67_判断输入的数字集合是否能计算出24 {
     public static boolean dfs(int[] nums,boolean[] visited,int input) {
         for (int i = 0; i < nums.length; i++) {
             if (!visited[i]) {
