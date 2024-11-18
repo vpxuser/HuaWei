@@ -2,7 +2,6 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class HJ20_密码合法性校验 {
-    private static String vaild = "NG";
 
     public static boolean checkLength(String password) {
         return password.length() >= 8;
@@ -26,7 +25,7 @@ public class HJ20_密码合法性校验 {
     }
 
     public static boolean checkSub(String password) {
-        for (int len = 3; len <= password.length(); len++) { // 子串长度大于2
+        for (int len = 3; len <= password.length(); len++) {
             HashSet<String> set = new HashSet<>();
             for (int i = 0; i <= password.length() - len; i++) {
                 String sub = password.substring(i, i + len);
@@ -44,9 +43,10 @@ public class HJ20_密码合法性校验 {
         while (sc.hasNext()) {
             String password = sc.nextLine();
             if (checkLength(password) && checkType(password) && checkSub(password)) {
-                vaild = "OK";
+                System.out.println("OK");
+            } else {
+                System.out.println("NG");
             }
-            System.out.println(vaild);
         }
     }
 }

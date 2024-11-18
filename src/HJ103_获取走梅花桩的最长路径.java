@@ -1,9 +1,18 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
-public class HJ103_梅花桩最长路径 {
+public class HJ103_获取走梅花桩的最长路径 {
+    public static int subMaxStep(int[] input,int offset) {
+        for (int i = offset+1; i < input.length; i++) {
+            if (input[i] > input[offset]) {
+                return 1+subMaxStep(input,i);
+            }
+        }
+        return 1;
+    }
+
     public static int step(int[] nums,ArrayList<Integer> results,int index,int count){
         for(int i=index+1;i<nums.length;i++){
             if(nums[i]>nums[index]){
